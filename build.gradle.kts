@@ -15,6 +15,7 @@ configure(subprojects.filter { it.path.contains("modules") }) {
     apply(plugin = "maven-publish")
     apply(plugin = "com.jfrog.bintray")
 
+    group = "com.andimarek.discreet"
     version = SimpleDateFormat("yyyy-MM-dd\'T\'HH-mm-ss").format(Date())
 
     tasks.register<Jar>("sourcesJar") {

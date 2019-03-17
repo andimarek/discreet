@@ -14,7 +14,10 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Optional;
+import java.util.Set;
+import java.util.function.BiPredicate;
 
 import static discreet.DiscreetPlugin.discreetConfig;
 import static discreet.DiscreetPlugin.sourceDirName;
@@ -22,24 +25,27 @@ import static discreet.DiscreetPlugin.sourceDirName;
 public class FetchSources extends DefaultTask {
 
     private String packagePrefix;
+
     @TaskAction
     void execute() {
         packagePrefix = getProject().getGroup() + "." + getProject().getName();
         Path srcPath = buildSrcPath();
-        System.out.println("srcPath: " + srcPath);
         Configuration discreet = getProject().getConfigurations().getByName(discreetConfig);
-        File singleFile = discreet.getSingleFile();
-        FileTree files = getProject().zipTree(singleFile);
+        Set<File> jars = discreet.getFiles();
+        for (File singleSourceJar : jars) {
 
+            FileTree sourceFiles = getProject().zipTree(singleSourceJar);
 
-        getProject().copy(copySpec -> {
-            copySpec.from(files).into(srcPath);
-        });
+            getProject().copy(copySpec -> {
+                copySpec.from(sourceFiles).into(srcPath);
+            });
 
+        }
         try {
-            Files.find(srcPath, 1000,
-                    (path, fileAttribute) -> fileAttribute.isRegularFile() &&
-                            path.toFile().getName().endsWith(".java"))
+
+            BiPredicate<Path, BasicFileAttributes> fileFilter =
+                    (path, fileAttribute) -> fileAttribute.isRegularFile() && path.toFile().getName().endsWith(".java");
+            Files.find(srcPath, 1000, fileFilter)
                     .forEach(path -> {
                         patchPackageName(path);
                     });
