@@ -1,2 +1,2 @@
 rootProject.name = "discreet"
-include("async", "example")
+include("modules", "modules:async", "example")

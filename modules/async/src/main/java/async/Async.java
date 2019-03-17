@@ -18,6 +18,7 @@ import static java.util.Objects.requireNonNull;
 public class Async {
 
     @FunctionalInterface
+
     public interface CFFactory<T, U> {
         CompletableFuture<U> apply(T input, int index, List<U> previousResults);
     }

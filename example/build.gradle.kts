@@ -5,14 +5,19 @@ plugins {
 version = "1.0-SNAPSHOT"
 
 
+sourceSets {
+    main {
+        java {
+            srcDir("build/discreet-src")
+        }
+    }
+}
 
 repositories {
     mavenCentral()
-    maven(url = "https://dl.bintray.com/andimarek/discreet")
 }
 
 dependencies {
-    "discreet"("discreet:async:2019-03-17T10-26-19:sources")
     "discreet"("discreet:async:2019-03-17T10-26-19:sources")
 }
 
