@@ -2,6 +2,7 @@ plugins {
     java
     id("com.andimarek.discreet")
 }
+group = "com.andimarek.discreet"
 version = "1.0-SNAPSHOT"
 
 repositories {

@@ -24,9 +24,8 @@ public class FetchSources extends DefaultTask {
     private String packagePrefix;
     @TaskAction
     void execute() {
-        packagePrefix = getProject().getGroup() + "_" + getProject().getName();
-
-        Path srcPath = getProject().getBuildDir().toPath().resolve(sourceDirName).resolve(packagePrefix);
+        packagePrefix = getProject().getGroup() + "." + getProject().getName();
+        Path srcPath = buildSrcPath();
         System.out.println("srcPath: " + srcPath);
         Configuration discreet = getProject().getConfigurations().getByName(discreetConfig);
         File singleFile = discreet.getSingleFile();
@@ -51,9 +50,18 @@ public class FetchSources extends DefaultTask {
 
     }
 
+    private Path buildSrcPath() {
+        Path srcPath = getProject().getBuildDir().toPath().resolve(sourceDirName);
+        String[] split = packagePrefix.split("\\.");
+        for (String pathElement : split) {
+            srcPath = srcPath.resolve(pathElement);
+        }
+        return srcPath;
+
+    }
+
     private void patchPackageName(Path path) {
         try {
-            System.out.println(path);
             String javaFile = new String(Files.readAllBytes(path), "UTF-8");
             CompilationUnit compilationUnit = StaticJavaParser.parse(javaFile);
             Optional<PackageDeclaration> packageDeclaration = compilationUnit.getPackageDeclaration();

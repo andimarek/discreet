@@ -1,4 +1,4 @@
-import discreet_example.async.Async;
+import com.andimarek.discreet.example.async.Async;
 
 public class ExampleUsage {
 

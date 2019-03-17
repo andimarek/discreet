@@ -6,6 +6,7 @@ plugins {
     id("com.jfrog.bintray") version "1.8.4"
     `maven-publish`
 }
+group = "com.andimarek.discreet"
 
 
 configure(subprojects.filter { it.path.contains("modules") }) {
