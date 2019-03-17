@@ -18,9 +18,9 @@ public class DiscreetPlugin implements Plugin<Project> {
         JavaPluginConvention javaPlugin = project.getConvention().getPlugin(JavaPluginConvention.class);
         SourceSetContainer sourceSets = javaPlugin.getSourceSets();
         SourceSet mainSourSet = sourceSets.findByName("main");
-        SourceDirectorySet allJava = mainSourSet.getAllJava();
-//        allJava.srcDir(project.getBuildDir().toPath().resolve(sourceDirName));
-        System.out.println("sourceDirs:" + allJava.getSrcDirs());
+        SourceDirectorySet allJava = mainSourSet.getJava();
+        allJava.srcDir(project.getBuildDir().toPath().resolve(sourceDirName));
+
 
         project.getConfigurations().create("discreet");
         project.getRepositories().maven(mavenArtifactRepository -> mavenArtifactRepository.setUrl("https://dl.bintray.com/andimarek/discreet"));

@@ -4,15 +4,6 @@ plugins {
 }
 version = "1.0-SNAPSHOT"
 
-
-sourceSets {
-    main {
-        java {
-            srcDir("build/discreet-src")
-        }
-    }
-}
-
 repositories {
     mavenCentral()
 }
