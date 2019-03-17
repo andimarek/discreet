@@ -1,2 +1,2 @@
 rootProject.name = "discreet"
-include("async")
+include("async", "example")
