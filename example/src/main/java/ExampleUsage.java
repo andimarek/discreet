@@ -1,6 +1,8 @@
+import discreet_example.async.Async;
+
 public class ExampleUsage {
 
     public static void main(String[] args) {
-        async.Async.toCompletableFuture(null);
+        Async.toCompletableFuture(null);
     }
 }

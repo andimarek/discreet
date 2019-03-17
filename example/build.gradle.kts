@@ -1,6 +1,6 @@
 plugins {
     java
-    id("discreet")
+    id("com.andimarek.discreet")
 }
 version = "1.0-SNAPSHOT"
 
