@@ -20,7 +20,7 @@ Discreet makes this easier: just open a new PR in this repo and done.
 
 ### How it works 
 
-Discreet download the dependency source code and puts it in a special `{buildDir}/discreet-src` directory.
+Discreet downloads the dependency source code and puts it in a special `{buildDir}/discreet-src` directory.
 The source code is also prefixed with your project name to make it private.
 For example if you wanna use the `Async` class in your `example` project it will be in the `example.async` package.
 
