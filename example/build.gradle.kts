@@ -1,3 +1,5 @@
+import discreet.FetchSources
+
 plugins {
     java
     id("com.andimarek.discreet")
@@ -7,6 +9,10 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+}
+
+tasks.named<FetchSources>("fetchDiscreetSources") {
+    packagePrefix = "example.prefix"
 }
 
 dependencies {

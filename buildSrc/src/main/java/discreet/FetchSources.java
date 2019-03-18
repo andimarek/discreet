@@ -8,6 +8,7 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.file.FileTree;
+import org.gradle.api.tasks.Input;
 import org.gradle.api.tasks.TaskAction;
 
 import java.io.File;
@@ -32,9 +33,20 @@ public class FetchSources extends DefaultTask {
 
     private String packagePrefix;
 
+    public void setPackagePrefix(String packagePrefix) {
+        this.packagePrefix = packagePrefix;
+    }
+
+    @Input
+    public String getPackagePrefix() {
+        return packagePrefix;
+    }
+
     @TaskAction
     void execute() {
-        packagePrefix = getProject().getGroup() + "." + getProject().getName();
+        if (packagePrefix == null) {
+            packagePrefix = getProject().getGroup() + "." + getProject().getName();
+        }
         Path srcPath = buildSrcPath();
         Configuration discreet = getProject().getConfigurations().getByName(discreetConfig);
         Set<File> jars = discreet.getFiles();

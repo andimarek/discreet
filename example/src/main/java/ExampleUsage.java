@@ -1,5 +1,5 @@
-import com.andimarek.discreet.example.async.Async;
-import com.andimarek.discreet.example.stringutils.StringUtils;
+import example.prefix.async.Async;
+import example.prefix.stringutils.StringUtils;
 
 public class ExampleUsage {
 
