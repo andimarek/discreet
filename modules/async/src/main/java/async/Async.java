@@ -1,6 +1,8 @@
 package async;
 
 
+import com.andimarek.discreet.async.stringutils.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -183,6 +185,11 @@ public class Async {
         return values
                 .stream()
                 .map(cf -> cf.thenCompose(mapper::apply)).collect(Collectors.toList());
+    }
+
+
+    public static void test(String s) {
+        StringUtils.isNullOrEmpty(s);
     }
 
 }

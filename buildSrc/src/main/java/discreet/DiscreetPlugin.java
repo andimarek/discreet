@@ -21,8 +21,8 @@ public class DiscreetPlugin implements Plugin<Project> {
         SourceDirectorySet allJava = mainSourSet.getJava();
         allJava.srcDir(project.getBuildDir().toPath().resolve(sourceDirName));
 
-
         project.getConfigurations().create("discreet");
+
         project.getRepositories().maven(mavenArtifactRepository -> mavenArtifactRepository.setUrl("https://dl.bintray.com/andimarek/discreet"));
         project.getTasks().create("fetchDiscreetSources", FetchSources.class, (task) -> {
         });
@@ -30,6 +30,12 @@ public class DiscreetPlugin implements Plugin<Project> {
         for (Task task : compileJavaTasks) {
             task.dependsOn("fetchDiscreetSources");
         }
+
+//        project.getTasks().create("generateDiscreetMetadata", GenerateMetadata.class, (task) -> {
+//        });
+//
+//        ArrayList<Task> classesTask = new ArrayList<>(project.getTasksByName("classes", false));
+//        classesTask.get(0).dependsOn("generateDiscreetMetadata");
     }
 
 }
